@@ -6,6 +6,30 @@
     <title>Daily coding problem</title>
 </head>
 <body>
+    <h4>Problem # 1</h4>
+    <p>
+        Write a function, add_subtract, which alternately adds and subtracts curried arguments. Here are some sample operations:<br/>
+
+add_subtract(7) -> 7<br/>
+
+add_subtract(1)(2)(3) -> 1 + 2 - 3 -> 0<br/>
+
+add_subtract(-5)(10)(3)(9) -> -5 + 10 - 3 + 9 -> 11<br/>
+    </p>
+    <h4>Solution:</h4>
+    <code>const add_subtract = (num)=>{<br>
+        let sum = num;<br>
+        let isAdd = true;<br>
+        const inner = (nextNum)=>{<br>
+            sum = isAdd ? sum+ nextNum : sum - nextNum; <br>
+            isAdd = !isAdd; <br>
+            return inner; <br>
+        }<br>
+        inner.toString = ()=> sum;<br>
+        return inner;<br>
+        
+    }<br>
+    console.log("TOTAL: ",add_subtract(-5)(10)(3)(9).toString());</code>
     <script src="app.js"></script>
 </body>
 </html>
