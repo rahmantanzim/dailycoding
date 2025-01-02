@@ -5,17 +5,21 @@
 // add_subtract(1)(2)(3) -> 1 + 2 - 3 -> 0
 
 // add_subtract(-5)(10)(3)(9) -> -5 + 10 - 3 + 9 -> 11
+
+
 const add_subtract = (num)=>{
-    let sum = num; 
-    let isAdd = true;
-     const innerF = (nextNum)=>{
-        sum = isAdd ? sum + nextNum : sum - nextNum; 
-        isAdd = !isAdd;
-        return innerF;
-     }
-     innerF.toString = ()=> sum;
+    let sum = num; // get a variable to store the total
+    let isAdd = true; // variable which decides addition or subtraction
+    const inner = (nextNum)=>{
+        sum = isAdd ? sum+ nextNum : sum - nextNum; 
+        isAdd = !isAdd; //toggle addition in every call
+        return inner; //cycle continues
+    }
+    //JS give you the ability to overrride toString method bu using custom logic.
+    //By defining inner.toString, we tell JavaScript to use the running sum whenever it needs to convert the inner function to a string.
+    inner.toString = ()=> sum;
+    //lets return the inner 
+    return inner;
 
-     return innerF;
 }
-
-console.log(add_subtract(1)(7)(4).toString());
+console.log("TOTAL: ",add_subtract(-5)(10)(3)(9).toString());
